@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
+</head>
+<style>
+    .item {
+        word-break: break-all;
+        border: 1px solid black;
+    }
+    pre{
+        white-space: pre-wrap;
+    }
+</style>
+
+<body>
+    <!-- masonary layout -->
+    <!-- <h1>Text Files</h1>
+    <ul>
+        {{ range .Files }}
+        <li>
+            <a href="#{{ .Name }}">{{ .Name }}</a>
+        </li>
+        {{ end }}
+    </ul> -->
+    <div id="macy-container">
+        {{ range .Files }}
+        <div class="item">
+            <h2 id="{{ .Name }}">{{ .Name }}</h2>
+            <pre>{{ .Contents }}</pre>
+        </div>
+
+        {{ end }}
+        <!-- <div class="item">
+            Solid SnakeSolid SnakeSolid SnakeSolid SnakeSolid SnakeSolid SnakeSolid SnakeSolid SnakeSolid SnakeSolid
+            SnakeSolid SnakeSolid SnakeSolid SnakeSolid SnakeSolid Snake
+        </div>
+        <div class="item">Riou</div>
+        <div class="item">Jack Russel Jack RusselJack RusselJack RusselJack RusselJack RusselJack RusselJack RusselJack
+            RusselJack RusselJack RusselJack Russel</div>
+        <div class="item">Red</div>
+        <div class="item">SonicSonicSonicSonicSonicSonicSonicSonic</div> -->
+
+    </div>
+    <script>
+        var macy = Macy({
+            container: '#macy-container',
+            trueOrder: false,
+            waitForImages: false,
+            margin: 5,
+            columns: 10,
+            breakAt: {
+                1200: 5,
+                940: 3,
+                520: 2,
+                400: 1
+            }
+        });
+    </script>
+
+</body>
+
+</html>
