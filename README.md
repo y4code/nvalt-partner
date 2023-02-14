@@ -10,6 +10,8 @@ If you are using Mac, download the nvalt-partner binary from [here](https://gith
 ./nvalt-partner
 ```
 
+and open http://localhost:8080 in your browser.
+
 If you are not using Mac, you can download the source code and compile it by yourself.
 #  Screentshot
 
