@@ -13,40 +13,62 @@
         word-break: break-all;
         border: 1px solid black;
     }
-    pre{
+
+    pre {
         white-space: pre-wrap;
+    }
+
+    .grayspan {
+        padding: 5px;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        display: inline-block;
+    }
+
+    .grayspan:hover {
+        background-color: #e6e6e6;
+        position: relative;
+    }
+
+    .grayspan .contents {
+        display: none;
+        position: absolute;
+        background-color: #e6e6e6;
+        padding: 5px;
+        border-radius: 5px;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .grayspan:hover .contents {
+        display: block;
     }
 </style>
 
 <body>
-    <!-- masonary layout -->
-    <!-- <h1>Text Files</h1>
-    <ul>
-        {{ range .Files }}
-        <li>
-            <a href="#{{ .Name }}">{{ .Name }}</a>
-        </li>
-        {{ end }}
-    </ul> -->
-    <div id="macy-container">
+    <!-- Toggle button -->
+    <button id="toggle-button">Toggle</button>
+
+    <!-- masonry layout -->
+    <div id="macy-container" style="display:none">
         {{ range .Files }}
         <div class="item">
             <h2 id="{{ .Name }}">{{ .Name }}</h2>
             <pre>{{ .Contents }}</pre>
         </div>
-
         {{ end }}
-        <!-- <div class="item">
-            Solid SnakeSolid SnakeSolid SnakeSolid SnakeSolid SnakeSolid SnakeSolid SnakeSolid SnakeSolid SnakeSolid
-            SnakeSolid SnakeSolid SnakeSolid SnakeSolid SnakeSolid Snake
-        </div>
-        <div class="item">Riou</div>
-        <div class="item">Jack Russel Jack RusselJack RusselJack RusselJack RusselJack RusselJack RusselJack RusselJack
-            RusselJack RusselJack RusselJack Russel</div>
-        <div class="item">Red</div>
-        <div class="item">SonicSonicSonicSonicSonicSonicSonicSonic</div> -->
-
     </div>
+
+    <div class="grayspan-container">
+        {{ range .Files }}
+        <span class="grayspan">
+            <span>{{ .Name }}</span>
+            <div class="contents">{{ .Contents }}</div>
+        </span>
+        {{ end }}
+    </div>
+
     <script>
         var macy = Macy({
             container: '#macy-container',
@@ -60,6 +82,25 @@
                 520: 2,
                 400: 1
             }
+        });
+
+        var toggleButton = document.getElementById("toggle-button");
+        toggleButton.addEventListener("click", function () {
+            var grayspan_container = document.getElementsByClassName("grayspan-container");
+            if (grayspan_container[0].style.display === "none") {
+                grayspan_container[0].style.display = "block";
+            } else {
+                grayspan_container[0].style.display = "none";
+            }
+
+            var macy_container = document.getElementById("macy-container");
+            if (macy_container.style.display === "none") {
+                macy_container.style.display = "block";
+                macy.recalculate(true, true);
+            } else {
+                macy_container.style.display = "none";
+            }
+
         });
     </script>
 
