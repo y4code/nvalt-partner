@@ -1,6 +1,6 @@
 # nvalt-partner
 
-list all the text notes in a masonry layout
+list all the text notes in a masonry layout by last modified time.
 
 # Usage
 
