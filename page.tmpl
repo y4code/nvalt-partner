@@ -21,10 +21,11 @@
     }
 
     .grayspan {
-        padding: 5px;
-        border-radius: 5px;
+        padding: 1px;
+        border-radius: 2px;
         background-color: #f2f2f2;
-        display: inline-block;
+        margin: 1px;
+        border: 1px solid gray;
     }
 
     .grayspan:hover {
@@ -36,7 +37,7 @@
         display: none;
         position: absolute;
         background-color: #e6e6e6;
-        padding: 5px;
+        padding: 1px;
         border-radius: 5px;
         top: 100%;
         left: 50%;
@@ -53,7 +54,11 @@
         font-weight: 500;
         color: black;
     }
-    
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
 </style>
 
 <body>
@@ -73,8 +78,9 @@
     <div class="grayspan-container">
         {{ range .Files }}
         <span class="grayspan">
-            <span>{{ .Name }}</span>
-            <div class="contents">{{ .Contents }}</div>
+            <!-- disable the default style of a tag -->
+            <a href="nvalt://find/{{.Name}}/"><span>{{ .Name }}</span></a>
+            <pre class="contents">{{ .Contents }}</pre>
         </span>
         {{ end }}
     </div>

@@ -4,7 +4,7 @@ import (
 	_ "embed"
 	"fmt"
 	"html/template"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 	"sort"
@@ -66,13 +66,22 @@ func main() {
 				continue
 			}
 
+			var fileName string
+			//delete the file extension from the file name
+			if strings.HasSuffix(file.Name(), ".txt") {
+				fileName = strings.TrimSuffix(file.Name(), ".txt")
+			}
+			if strings.HasSuffix(file.Name(), ".md") {
+				fileName = strings.TrimSuffix(file.Name(), ".md")
+			}
+
 			f, err := os.Open(file.Name())
 			if err != nil {
 				fmt.Println("Error opening file:", err)
 				continue
 			}
 
-			contents, err := ioutil.ReadAll(f)
+			contents, err := io.ReadAll(f)
 			if err != nil {
 				fmt.Println("Error reading file:", err)
 				continue
@@ -82,8 +91,8 @@ func main() {
 				Name     string
 				Contents string
 			}{
-				Name:     file.Name(),
-				Contents: strings.TrimSpace(string(contents)),
+				Name:     fileName,
+				Contents: string(contents),
 			})
 
 			err = f.Close()
